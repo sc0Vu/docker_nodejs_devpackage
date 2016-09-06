@@ -1,0 +1,25 @@
+app:
+    build: ./app
+    volumes:
+        - ./app/node:/src
+    ports:
+        - "3000:3000"
+#    links:
+#        - mongo:mongo
+#        - redis:redis
+    tty: true
+    restart: always
+
+mongo:
+    build: ./mongo
+    volumes:
+        - ./data/mongo:/data/db
+    ports:
+        - "27017:27017"
+
+redis:
+    build: ./redis
+    volumes:
+        - ./data/redis:/data/redis
+    ports:
+        - "6379:6379"
