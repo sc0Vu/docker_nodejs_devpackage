@@ -1,25 +1,36 @@
 app:
     build: ./app
-    volumes:
-        - ./app/node:/src
     ports:
         - "3000:3000"
-#    links:
-#        - mongo:mongo
-#        - redis:redis
+    links:
+        - mongo:mongo
+        - redis:redis
     tty: true
+    volumes_from:
+        - data_volume
     restart: always
 
 mongo:
     build: ./mongo
-    volumes:
-        - ./data/mongo:/data/db
-    ports:
-        - "27017:27017"
+# https://github.com/mvertes/docker-alpine-mongo/issues/1
+#    volumes_from:
+#        - data_volume
+# if you want to connect outside
+# or you can connect using ip(checkout with docker inspect)
+#    ports:
+#        - "27017:27017"
 
 redis:
     build: ./redis
+    volumes_from:
+        - data_volume
+# if you want to connect outside
+# or you can connect using ip(checkout with docker inspect)
+#    ports:
+#        - "6379:6379"
+
+data_volume:
+    image: tianon/true
     volumes:
+        - ./app/node:/src
         - ./data/redis:/data/redis
-    ports:
-        - "6379:6379"
