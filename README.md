@@ -1,18 +1,17 @@
-# nodejs_devpackage
-docker nodejs devpackage 
+# nodejs docker devpackage
 
 Docker nodejs develop package
 
-include nodejs mongodb redis 
+Include nodejs mongodb redis 
 
-Usage
+# Usage
 
     docker-compose up -d
 
-Connect to your container
+# Connect to your container
 
     docker for mac: localhost:27017
 
     others: <docker-machine ip>:27017
 
-Have fun!
+    Have fun!
